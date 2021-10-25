@@ -28,7 +28,9 @@ $ sls offline
 $ SLS_DEBUG=* serverless offline
 ```
 
-**Note** You need to restart the local SQS you have running as part of this project once you have 
+**Note** You need to restart the local SQS you have running as part of this project once you have started serverless the first time. 
+The *serverless.yml* file sets up and autocreates the queues that are used with these lambdas.
+
 ```bash
 $ docker exec -it alpine-sqs sh -c "supervisorctl restart elasticmq"
 ```
