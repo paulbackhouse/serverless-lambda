@@ -24,6 +24,11 @@ $ npm install
 # development
 $ sls offline
 
-# debug mode
-$ SLS_DEBUG=* serverless offline. Show all endpoints
+# debug mode, shows all endpoints
+$ SLS_DEBUG=* serverless offline
+```
+
+**Note** You need to restart the local SQS you have running as part of this project once you have 
+```bash
+$ docker exec -it alpine-sqs sh -c "supervisorctl restart elasticmq"
 ```
