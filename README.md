@@ -10,7 +10,26 @@ This uses the Servless Framework
 - Offline SQS plugin: https://www.npmjs.com/package/serverless-offline-sqs
 
 ## Prerequisites
-You must have this project setup and running locally https://github.com/paulbackhouse/nestjs-poc 
+If you wish to run the hello or goodbye functions,
+**You must have this project setup and running locally https://github.com/paulbackhouse/nestjs-poc**
+
+Local lambda test-harness-lambda can be run without the need for this project.
+
+**Note**
+Current code for hello and goodbye handlers is commented out in serverless.yml
+
+## LoggerService dependency
+This project does contain a dependency on https://github.com/paulbackhouse/logger-test which is a test npm package - which requires adn instance of seq running locally:
+
+### Local Seq - logging app
+Local url: http://localhost:5341/
+
+```bash
+# https://docs.datalust.co/docs/getting-started-with-docker
+$ docker run --name seq -d --restart unless-stopped -e ACCEPT_EULA=Y -p 5341:80 datalust/seq:latest
+```
+Make sure you have these containers and they are running.
+
 
 ## Installation
 
