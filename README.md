@@ -28,6 +28,17 @@ $ sls offline
 $ SLS_DEBUG=* serverless offline
 ```
 
+## Invoke a Lambda function
+The following cmd will invoke a lambda, you do not need to the run the app first, this runs and invokes in one single cmd
+
+```bash
+# invokes a lambda using a json event file
+ serverless-lambda % sls invoke local -f {functionName} --path {event-json-file}
+```
+See: https://docs.aws.amazon.com/code-samples/latest/catalog/lambda_functions-blank-java-event.json.html
+Events can be from a queue, an HTTP request etc...
+
+
 **Note** You need to restart the local SQS you have running as part of this project once you have started serverless the first time. 
 The *serverless.yml* file sets up and autocreates the queues that are used with these lambdas.
 

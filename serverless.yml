@@ -63,49 +63,66 @@ provider:
 #    - include-me-dir/**
 
 functions:
-  hello:
-    handler: hello-lambda/handler.hello
+  # hello:
+  #   handler: hello-lambda/handler.hello
+  #   timeout: 900
+  #   memorySize: 10240
+  #   events:
+  #    - sqs: 
+  #        arn: 
+  #          Fn::GetAtt:
+  #            - HelloQueue
+  #            - Arn  
+  # goodbye:
+  #   handler: goodbye-lambda/handler.goodbye
+  #   timeout: 900
+  #   memorySize: 10240
+  #   events:
+  #    - sqs: 
+  #        arn: 
+  #          Fn::GetAtt:
+  #            - GoodbyeQueue
+  #            - Arn  
+  testHarness:
+    handler: test-harness-lambda/handler.testHarness
+    timeout: 900
+    memorySize: 10240
     events:
-     - sqs: 
-         arn: 
-           Fn::GetAtt:
-             - HelloQueue
-             - Arn  
-  goodbye:
-    handler: goodbye-lambda/handler.goodbye
-    events:
-     - sqs: 
-         arn: 
-           Fn::GetAtt:
-             - GoodbyeQueue
-             - Arn                   
+      - http:
+          method: get
+          path: /test/{test_id}
+          cors: true
+          request:
+            parameters:
+              paths:
+                test_id: true 
 
-resources:
-  Resources:
-    HelloQueue:
-      Type: "AWS::SQS::Queue"
-      Properties:
-        QueueName: helloQueue.fifo
-        FifoQueue: true
-        ContentBasedDeduplication: true
-    GoodbyeQueue:
-      Type: "AWS::SQS::Queue"
-      Properties:
-        QueueName: goodbyeQueue.fifo
-        FifoQueue: true
-        ContentBasedDeduplication: true        
+# resources:
+#   Resources:
+#     HelloQueue:
+#       Type: "AWS::SQS::Queue"
+#       Properties:
+#         QueueName: helloQueue.fifo
+#         FifoQueue: true
+#         ContentBasedDeduplication: true
+#     GoodbyeQueue:
+#       Type: "AWS::SQS::Queue"
+#       Properties:
+#         QueueName: goodbyeQueue.fifo
+#         FifoQueue: true
+#         ContentBasedDeduplication: true        
 
 custom:
   serverless-offline:
     useChildProcesses: true  
-  serverless-offline-sqs:
-    autoCreate: true                 # create queue if not exists
-    apiVersion: '2012-11-05'
-    endpoint: http://localhost:9324
-    region: eu-west-1
-    accessKeyId: paul
-    secretAccessKey: password
-    skipCacheInvalidation: false
+#   serverless-offline-sqs:
+#     autoCreate: true                 # create queue if not exists
+#     apiVersion: '2012-11-05'
+#     endpoint: http://localhost:9324
+#     region: eu-west-1
+#     accessKeyId: paul
+#     secretAccessKey: password
+#     skipCacheInvalidation: false
     
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events

@@ -2,13 +2,26 @@
 
 module.exports.goodbye = async (event) => {
 
-  console.log('goodbye lambda called from queue... goodbye every body :(', event);
+  const service  = require('../LoggerService');
+  const log = service.getLogger('Goodbye Lambda');
 
-  return {
-    statusCode: 200,
-    body: null,
-  };
+  log.info('Lambda Handler: Start: Event handler, beginning process', event);
 
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
+  try {
+    // some other code would be here
+    log.info('Lambda Handler: Complete: Event handled', event);
+  
+    return {
+      statusCode: 500
+    }
+  }
+  catch (ex) {
+    log.error('Lambda failed to handle event', {
+      event: event,
+      exception: ex
+    });
+  }
+
+  throw new Error('Failed: Lambda failed to handle the event', event);
+  
 };

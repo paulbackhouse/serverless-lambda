@@ -1,9 +1,9 @@
 'use strict';
 
-module.exports.hello = async (event) => {
+module.exports.testHarness = async (event) => {
 
   const service  = require('../LoggerService');
-  const log = service.getLogger('Hello Lambda');
+  const log = service.getLogger('Test Harness Lambda');
 
   log.info('Lambda Handler: Start: Event handler, beginning process', event);
 
