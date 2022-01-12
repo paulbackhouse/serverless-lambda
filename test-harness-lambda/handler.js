@@ -2,6 +2,7 @@
 
 module.exports.testHarness = async (event) => {
 
+  const sleep = require('sleep-promise');
   const service  = require('../LoggerService');
   const log = service.getLogger('Test Harness Lambda');
 
@@ -10,9 +11,12 @@ module.exports.testHarness = async (event) => {
   try {
     // some other code would be here
     log.info('Lambda Handler: Complete: Event handled', event);
+
+    await sleep(7000)
+    log.warn('Lambda did not timeout as expected');
   
     return {
-      statusCode: 500
+      statusCode: 200
     }
   }
   catch (ex) {

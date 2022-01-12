@@ -52,7 +52,7 @@ The following cmd will invoke a lambda, you do not need to the run the app first
 
 ```bash
 # invokes a lambda using a json event file
- serverless-lambda % sls invoke local -f {functionName} --path {event-json-file}
+$ sls invoke local -f {functionName} --path {event-json-file}
 ```
 See: https://docs.aws.amazon.com/code-samples/latest/catalog/lambda_functions-blank-java-event.json.html
 Events can be from a queue, an HTTP request etc...
